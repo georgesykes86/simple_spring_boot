@@ -1,13 +1,15 @@
 package com.georgesykes86.simple_spring_boot;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class BusinessService {
+  private DataService dataService;
 
-  @Autowired
-  DataService dataService;
+  public BusinessService(DataService dataService) {
+    super();
+    this.dataService = dataService;
+  }
 
   public int findLargestValue() {
     int[] data = dataService.retrieveAllData();
