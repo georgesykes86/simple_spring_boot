@@ -19,6 +19,4 @@ public class DataServiceTest {
   public void returnsDataArrayOfCorrectLength() {
     assertEquals(data.length, service.retrieveAllData().length);
   }
-
-
 }
