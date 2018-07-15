@@ -24,9 +24,21 @@ public class BusinessServiceTest {
   }
 
   @Test
-  public void returnsLargestValue() {
+  public void returnsDefaultValue() {
     when(dataServiceMock.retrieveAllData()).thenReturn(new int[] {});
     assertEquals(Integer.MIN_VALUE, businessService.findLargestValue());
+  }
+
+  @Test
+  public void returnsLargestValue() {
+    when(dataServiceMock.retrieveAllData()).thenReturn(new int[] {2,3,4});
+    assertEquals(4, businessService.findLargestValue());
+  }
+
+  @Test
+  public void returnsAnotherLargestValue() {
+    when(dataServiceMock.retrieveAllData()).thenReturn(new int[] {2,3,5, 100});
+    assertEquals(100, businessService.findLargestValue());
   }
 
 }
