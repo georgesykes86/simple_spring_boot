@@ -47,8 +47,8 @@ public class ControllerTest {
 
   @Test
   public void getLargestReturnsTheLargest() {
-    when(service.findLargestValue()).thenReturn(5);
-    assertEquals(5, homeController.maxValue());
+    when(service.findFastest()).thenReturn("Tom");
+    assertEquals("Tom", homeController.maxValue());
   }
 
 }

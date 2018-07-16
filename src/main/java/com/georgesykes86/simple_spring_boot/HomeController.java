@@ -20,8 +20,7 @@ public class HomeController {
 
   @RequestMapping(value = "/max")
   @ResponseBody
-  public int maxValue() {
-    System.out.println(service.findLargestValue());
-    return service.findLargestValue();
+  public String maxValue() {
+    return service.findFastest();
   }
 }

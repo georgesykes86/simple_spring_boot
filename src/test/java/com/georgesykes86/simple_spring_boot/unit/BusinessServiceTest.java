@@ -5,6 +5,9 @@ import static org.mockito.Mockito.when;
 
 import com.georgesykes86.simple_spring_boot.BusinessService;
 import com.georgesykes86.simple_spring_boot.DataService;
+import com.georgesykes86.simple_spring_boot.Runner;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -18,27 +21,42 @@ public class BusinessServiceTest {
   @InjectMocks
   BusinessService businessService;
 
+  @Mock
+  Runner runner;
+
+  @Mock
+  Runner runner2;
+
+  private final List<Runner> runners = new ArrayList();
+
   @Before
   public void before() {
     MockitoAnnotations.initMocks(this);
+    runners.add(runner);
+    runners.add(runner2);
+    when(runner.getSpeed()).thenReturn(20);
+    when(runner.getName()).thenReturn("John");
   }
 
   @Test
   public void returnsDefaultValue() {
-    when(dataServiceMock.retrieveAllData()).thenReturn(new int[] {});
-    assertEquals(Integer.MIN_VALUE, businessService.findLargestValue());
+    when(dataServiceMock.retrieveAllData()).thenReturn(new ArrayList<>());
+    assertEquals("Sorry no runners to compare", businessService.findFastest());
   }
 
   @Test
-  public void returnsLargestValue() {
-    when(dataServiceMock.retrieveAllData()).thenReturn(new int[] {2,3,4});
-    assertEquals(4, businessService.findLargestValue());
+  public void returnsFastestRunner() {
+    when(dataServiceMock.retrieveAllData()).thenReturn(runners);
+    when(runner2.getSpeed()).thenReturn(10);
+    assertEquals("John", businessService.findFastest());
   }
 
   @Test
-  public void returnsAnotherLargestValue() {
-    when(dataServiceMock.retrieveAllData()).thenReturn(new int[] {2,3,5, 100});
-    assertEquals(100, businessService.findLargestValue());
+  public void returnsFastestRunnersTogether() {
+    when(dataServiceMock.retrieveAllData()).thenReturn(runners);
+    when(runner2.getSpeed()).thenReturn(20);
+    when(runner2.getName()).thenReturn("Ben");
+    assertEquals("John, Ben", businessService.findFastest());
   }
 
 }

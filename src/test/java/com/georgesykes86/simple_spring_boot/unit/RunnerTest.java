@@ -24,5 +24,9 @@ public class RunnerTest {
     assertEquals(name, runner.getName());
   }
 
+  @Test
+  public void hasCorrectSpeed() {
+    assertEquals(speed, runner.getSpeed());
+  }
 
 }

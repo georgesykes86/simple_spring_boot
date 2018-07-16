@@ -1,5 +1,6 @@
 package com.georgesykes86.simple_spring_boot;
 
+import java.util.List;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -11,12 +12,19 @@ public class BusinessService {
     this.dataService = dataService;
   }
 
-  public int findLargestValue() {
-    int[] data = dataService.retrieveAllData();
-    int smallest = Integer.MIN_VALUE;
-    for(int num : data) {
-      if(num > smallest) { smallest = num; }
+  public String findFastest() {
+    List<Runner> data = dataService.retrieveAllData();
+    if(data.isEmpty()) { return "Sorry no runners to compare"; }
+    int fastest = data.get(0).getSpeed();
+    String name = "";
+    for(Runner runner : data) {
+      if(runner.getSpeed() > fastest) {
+        fastest = runner.getSpeed();
+        name = runner.getName();
+      } else if(runner.getSpeed() == fastest) {
+        name = name + ", " + runner.getName();
+      }
     }
-    return smallest;
+    return name.substring(2);
   }
 }

@@ -1,10 +1,16 @@
 package com.georgesykes86.simple_spring_boot;
 
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public class DataService {
-  public int[] retrieveAllData() {
-    return new int[] {1,2,3,4};
+
+  @Autowired
+  DataRepository repository;
+
+  public List<Runner> retrieveAllData() {
+    return repository.findAll();
   }
 }
